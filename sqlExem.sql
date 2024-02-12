@@ -85,3 +85,10 @@ mysql> SELECT user.user_name, user.user_surname, tovar.tovar_name, tovar.price, 
 | Сидоров   | П.           | Корал Лецитин           | 1785.00 |    15 |   3060.00 |         23 |
 +-----------+--------------+-------------------------+---------+-------+-----------+------------+
 2 rows in set (0.00 sec)
+--------------------------уникальные поля и чеки----------------------------------
+mysql> create table inf(
+    -> id_inf INT PRIMARY KEY AUTO_INCREMENT,
+    -> adress VARCHAR(64) unique,
+    -> email VARCHAR(64) UNIQUE CHECK(email LIKE "%@example.com")
+    -> );
+Query OK, 0 rows affected (0.02 sec)
