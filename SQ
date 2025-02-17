@@ -1,0 +1,135 @@
+DECLARE
+	@datefrom DATETIME,
+	@dateto DATETIME
+
+SET @datefrom = dbo.svf_get_first_day_month_before(GETDATE())
+SET @dateto = dbo.svf_get_last_day_month_before(GETDATE());
+WITH cte AS (
+	SELECT category
+		 , unit
+	     , status_unit_name 
+		 , location_unit
+	FROM [dbo].[(Проведение IT-работ)_(unit)] WITH (NOLOCK)	
+	WHERE	category = 'Оборудование АПС/Терминал въезда-выезда' -- 1.3.1.
+	AND
+			enterprise_owner_unit = 'DOMODEDOVO ASSET MANAGEMENT' 
+	AND 
+			last_version = 1
+	AND
+			function_unit IN ('Контроль въезда', 'Въездной парковочный терминал')
+	AND
+			[delete] = ''
+	),
+ cte1 AS (
+	SELECT category
+		 , unit
+	     , status_unit_name 
+	FROM [dbo].[(Проведение IT-работ)_(unit)] WITH (NOLOCK)	
+	WHERE	category = 'Оборудование АПС/Терминал въезда-выезда' -- 1.3.1.
+	AND
+			enterprise_owner_unit = 'DOMODEDOVO ASSET MANAGEMENT' 
+	AND
+			function_unit IN ('Контроль въезда', 'Въездной парковочный терминал')
+	AND 
+			last_version = 1
+	AND
+			[delete] = ''
+	),
+ cte2 AS (
+	SELECT category
+		 , unit
+	     , status_unit_name 
+	FROM [dbo].[(Проведение IT-работ)_(unit)] WITH (NOLOCK)	
+	WHERE	category = 'Оборудование АПС/Кассовый автомат' -- 1.3.1.
+	AND
+			enterprise_owner_unit = 'DOMODEDOVO ASSET MANAGEMENT' 
+	AND 
+			last_version = 1
+	AND
+			[delete] = ''
+ ),
+  cte3 AS (
+	SELECT category
+		 , unit
+	     , status_unit_name 
+	FROM [dbo].[(Проведение IT-работ)_(unit)] WITH (NOLOCK)	
+	WHERE	category = 'Оборудование АПС/Шлагбаум' -- 1.3.1.
+	AND
+			enterprise_owner_unit = 'DOMODEDOVO ASSET MANAGEMENT' 
+	AND 
+			last_version = 1
+	AND
+			[delete] = ''
+  ),
+  cte4 AS (
+  SELECT category
+		 , unit
+	     , status_unit_name 
+	FROM [dbo].[(Проведение IT-работ)_(unit)] WITH (NOLOCK)	
+	WHERE	category = 'Оборудование АПС/Видеокамера (распознавание номерных знаков автомобилей)' -- 1.3.1.
+	AND
+			enterprise_owner_unit = 'DOMODEDOVO ASSET MANAGEMENT' 
+	AND 
+			last_version = 1
+	AND
+			[delete] = ''
+  
+  ),
+  cte5 AS (
+  SELECT category
+		 , unit
+	     , status_unit_name 
+	FROM [dbo].[(Проведение IT-работ)_(unit)] WITH (NOLOCK)	
+	WHERE	category = 'Оборудование АПС/Мультикон' -- 1.3.1.
+	AND
+			enterprise_owner_unit = 'DOMODEDOVO ASSET MANAGEMENT' 
+	AND 
+			last_version = 1
+	AND
+			[delete] = ''
+  
+  ),
+  cte6 AS (
+  SELECT category
+		 , unit
+	     , status_unit_name 
+	FROM [dbo].[(Проведение IT-работ)_(unit)] WITH (NOLOCK)	
+	WHERE	category = 'Оборудование АПС/Банкнотоприемник' -- 1.3.1.
+	AND
+			enterprise_owner_unit = 'DOMODEDOVO ASSET MANAGEMENT' 
+	AND 
+			last_version = 1
+	AND
+			[delete] = ''
+  
+  ),
+  cte7 AS (
+SELECT category
+		 , unit
+	     , status_unit_name 
+	FROM [dbo].[(Проведение IT-работ)_(unit)] WITH (NOLOCK)	
+	WHERE	category = 'Оборудование АПС/Оборудование Uniteller' -- 1.3.1.
+	AND
+			enterprise_owner_unit = 'DOMODEDOVO ASSET MANAGEMENT' 
+	AND 
+			last_version = 1
+	AND
+			[delete] = ''
+  )
+
+
+SELECT * FROM cte
+UNION ALL
+SELECT * from cte1
+UNION ALL
+SELECT * FROM cte2
+UNION ALL
+SELECT * FROM cte3
+UNION ALL
+SELECT * FROM cte4
+UNION ALL
+SELECT * FROM cte5
+UNION ALL
+SELECT * FROM cte6
+UNION ALL
+SELECT * FROM cte7
